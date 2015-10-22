@@ -33,7 +33,7 @@ def setup_args(parser):
                         required = True)
                      
     parser.add_argument('-l,', 
-                         '--lables', 
+                         '--labels', 
                          nargs = "*",
                          help='', 
                          required = False)
@@ -52,21 +52,21 @@ def setup_args(parser):
     
 def venn(args):
     files =  args.input_files
-    lables =  args.lables
+    labels =  args.labels
     plot_title =  args.title
     out = args.out
         
     # check input
     check_max3(files)
     
-    if lables != None:
-        if len(lables) != len(files):
-            sys.stderr.write('error: number of lables and input files are unequal\n')
+    if labels != None:
+        if len(labels) != len(files):
+            sys.stderr.write('error: number of labels and input files are unequal\n')
             sys.exit()
     
     # name labels if not exists
-    if not lables:
-        lables = files
+    if not labels:
+        labels = files
         
     # read files
     content_files = []
@@ -81,12 +81,12 @@ def venn(args):
     # venn2
     if len(files) == 2:
         venn2([sets[0], sets[1]], 
-        set_labels = (lables[0], lables[1]))
+        set_labels = (labels[0], labels[1]))
         
     # venn3
     if len(files) == 3:
         venn3([sets[0], sets[1], sets[2]], 
-              set_labels = (lables[0], lables[1], lables[2]))
+              set_labels = (labels[0], labels[1], labels[2]))
     
     if plot_title != None:
         plt.title('%s' % plot_title)
